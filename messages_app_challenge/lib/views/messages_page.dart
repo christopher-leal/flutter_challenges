@@ -7,8 +7,10 @@ class MessagesPage extends StatefulWidget {
 }
 
 class _MessagesPageState extends State<MessagesPage> {
-  bool expanded = false;
   final _scrollController = ScrollController();
+
+  bool expanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,6 @@ class _MessagesPageState extends State<MessagesPage> {
               Expanded(
                 child: NotificationListener<ScrollNotification>(
                   onNotification: (notification) {
-                    print(_scrollController.position.userScrollDirection);
                     if (_scrollController.position.userScrollDirection == ScrollDirection.reverse && expanded) {
                       setState(() {
                         expanded = false;
@@ -66,23 +67,40 @@ class _MessagesPageState extends State<MessagesPage> {
   }
 }
 
-class _CustomFAB extends StatelessWidget {
+class _CustomFAB extends StatefulWidget {
   final bool expanded;
   final VoidCallback onTap;
 
   const _CustomFAB({this.expanded = false, @required this.onTap});
 
   @override
+  __CustomFABState createState() => __CustomFABState();
+}
+
+class __CustomFABState extends State<_CustomFAB> {
+  final _key = GlobalKey();
+  double _maxSize = 150.0;
+
+  final _minSize = 50.0;
+  final _iconSize = 24.0;
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+      setState(() {
+        _maxSize = _key.currentContext.size.width + _minSize + _iconSize / 2;
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const _minSize = 50.0;
-    const _maxSize = 150.0;
-    const _iconSize = 24.0;
     final position = _minSize / 2 - _iconSize / 2;
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
-        width: expanded ? _maxSize : _minSize,
+        width: widget.expanded ? _maxSize : _minSize,
         height: _minSize,
         decoration: BoxDecoration(color: Colors.blue[700], borderRadius: BorderRadius.circular(_minSize)),
         child: Stack(
@@ -97,9 +115,10 @@ class _CustomFAB extends StatelessWidget {
             ),
             Positioned(
                 top: position,
-                left: position + _iconSize * 1.6,
+                left: position + _iconSize * 1.5,
                 child: Text(
                   'Start Chat',
+                  key: _key,
                   style: TextStyle(fontSize: 20.0),
                 ))
           ],
