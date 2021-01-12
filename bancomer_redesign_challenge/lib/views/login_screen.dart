@@ -1,4 +1,5 @@
 import 'package:bancomer_redesign_challenge/theme.dart';
+import 'package:bancomer_redesign_challenge/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -113,16 +114,21 @@ class _LoginActions extends StatelessWidget {
               backgroundImage: AssetImage('assets/user.png'),
             ),
             const SizedBox(width: 20),
-            Container(
-              width: 35.0,
-              height: 35.0,
-              decoration: BoxDecoration(color: BBVAColors.primary, shape: BoxShape.circle),
-              child: Icon(
-                Icons.swap_horiz,
-                size: 25.0,
-                color: BBVAColors.white,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => HomeScreen()));
+              },
+              child: Container(
+                width: 35.0,
+                height: 35.0,
+                decoration: BoxDecoration(color: BBVAColors.primary, shape: BoxShape.circle),
+                child: Icon(
+                  Icons.swap_horiz,
+                  size: 25.0,
+                  color: BBVAColors.white,
+                ),
+                // onPressed: () {},
               ),
-              // onPressed: () {},
             )
           ],
         ),
@@ -159,7 +165,7 @@ class _LoginActions extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          ' Olvidé mi contraseña',
+          'Olvidé mi contraseña',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: BBVAColors.primary,
