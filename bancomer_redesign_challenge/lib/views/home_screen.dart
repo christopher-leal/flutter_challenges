@@ -1,4 +1,6 @@
 import 'package:bancomer_redesign_challenge/theme.dart';
+import 'package:bancomer_redesign_challenge/views/account_screen.dart';
+import 'package:bancomer_redesign_challenge/widgets/background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
@@ -11,7 +13,34 @@ class HomeScreen extends StatelessWidget {
         body: Stack(
       fit: StackFit.expand,
       children: [
-        _Background(),
+        Background(
+          color: BBVAColors.primary,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(
+                Icons.menu,
+                size: 30.0,
+                color: BBVAColors.white,
+              ),
+              Text(
+                'Hola, Christopher',
+                style: TextStyle(color: BBVAColors.white, fontWeight: FontWeight.bold, fontSize: 22),
+              ),
+              Container(
+                decoration: BoxDecoration(shape: BoxShape.circle, color: BBVAColors.white),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: CircleAvatar(
+                    radius: 15.0,
+                    backgroundImage: AssetImage('assets/user.png'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: SizedBox(
@@ -288,19 +317,29 @@ class _MyAccounts extends StatelessWidget {
               ],
             ),
             Spacer(),
-            _AccountItem(
-              account: '001ah7297',
-              number: '*37265',
-              amount: '\$20,000',
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AccountScreen()));
+              },
+              child: _AccountItem(
+                account: '001ah7297',
+                number: '*37265',
+                amount: '\$20,000',
+              ),
             ),
             Divider(
               color: BBVAColors.grey,
               thickness: 1.0,
             ),
-            _AccountItem(
-              account: '001ah7246',
-              number: '*36264',
-              amount: '\$158,000',
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AccountScreen()));
+              },
+              child: _AccountItem(
+                account: '001ah7246',
+                number: '*36264',
+                amount: '\$158,000',
+              ),
             ),
           ],
         ),
@@ -349,61 +388,6 @@ class _AccountItem extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class _Background extends StatelessWidget {
-  const _Background({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            color: BBVAColors.primary,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.menu,
-                      size: 30.0,
-                      color: BBVAColors.white,
-                    ),
-                    Text(
-                      'Hola, Christopher',
-                      style: TextStyle(color: BBVAColors.white, fontWeight: FontWeight.bold, fontSize: 22),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: BBVAColors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: CircleAvatar(
-                          radius: 15.0,
-                          backgroundImage: AssetImage('assets/user.png'),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: BBVAColors.secondary,
-          ),
-        ),
-      ],
     );
   }
 }
