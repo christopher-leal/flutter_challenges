@@ -20,8 +20,10 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _SnakeButton(
+                snakeColor: Colors.blue,
+                borderColor: Colors.green,
                 duration: const Duration(milliseconds: 2000),
-                child: Text('Hola'),
+                child: Text('Te amo'),
                 onTap: () {},
               ),
             ],
@@ -104,8 +106,8 @@ class _SnakePainter extends CustomPainter {
     final path = Path.combine(PathOperation.xor, Path()..addRect(rect), Path()..addRect(rect.deflate(borderWidth)));
     final snakePain = Paint()
       ..shader = SweepGradient(
-              colors: [snakeColor, Colors.transparent],
-              stops: [0.8, 1.0],
+              colors: [Colors.transparent, snakeColor],
+              stops: [0.5, 1.0],
               startAngle: 0.0,
               endAngle: vector.radians(90),
               transform: GradientRotation(vector.radians(360 * animation.value)))
