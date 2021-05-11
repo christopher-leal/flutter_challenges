@@ -5,25 +5,25 @@ final items = [
   Item(
     title: faker.person.name(),
     subtitle: faker.lorem.words(3).join(" "),
-    avatar: 'img1.png',
-    bg: 'person1.png',
+    bg: 'img1.png',
+    avatar: 'person1.png',
   ),
   Item(
     title: faker.person.name(),
     subtitle: faker.lorem.words(3).join(" "),
-    avatar: 'img2.png',
-    bg: 'person2.png',
+    bg: 'img2.png',
+    avatar: 'person2.png',
   ),
   Item(
     title: faker.person.name(),
     subtitle: faker.lorem.words(3).join(" "),
-    avatar: 'img3.png',
-    bg: 'person3.png',
+    bg: 'img3.png',
+    avatar: 'person3.png',
   ),
   Item(
     title: faker.person.name(),
     subtitle: faker.lorem.words(3).join(" "),
-    avatar: 'img4.png',
-    bg: 'person4.png',
+    bg: 'img4.png',
+    avatar: 'person4.png',
   ),
 ];
