@@ -7,14 +7,27 @@ import 'package:flutter/material.dart';
 const menuCollapsedWidth = 200.0;
 const minMenuHeight = 70.0;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Item item;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          _BuildList(),
-          _BuildBottomNav(),
+          _BuildList(
+            onTap: (value) {
+              setState(() {
+                item = value;
+              });
+            },
+          ),
+          _BuildBottomNav(item: item),
         ],
       ),
     );
@@ -22,6 +35,9 @@ class HomePage extends StatelessWidget {
 }
 
 class _BuildBottomNav extends StatefulWidget {
+  const _BuildBottomNav({Key key, @required this.item}) : super(key: key);
+  final Item item;
+
   @override
   __BuildBottomNavState createState() => __BuildBottomNavState();
 }
@@ -56,7 +72,7 @@ class __BuildBottomNavState extends State<_BuildBottomNav> with SingleTickerProv
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Image.asset(
-                  'assets/${items[0].bg}',
+                  'assets/${widget.item.bg}',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -68,12 +84,12 @@ class __BuildBottomNavState extends State<_BuildBottomNav> with SingleTickerProv
               spacing: 12.0,
               children: [
                 Text(
-                  items[0].title,
+                  widget.item.title,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey, fontSize: 18.0, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  items[0].subtitle,
+                  widget.item.subtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.w600),
                 ),
@@ -116,31 +132,35 @@ class __BuildBottomNavState extends State<_BuildBottomNav> with SingleTickerProv
 
   Widget _collapsedMenu() {
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: Icon(Icons.playlist_play_outlined),
-            iconSize: 30.0,
-            onPressed: () {},
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        IconButton(
+          icon: Icon(Icons.playlist_play_outlined),
+          iconSize: 30.0,
+          onPressed: () {},
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              isExpanded = true;
+              _currentHeight = size.height * 0.6;
+              _controller.forward(from: 0.0);
+            });
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Image.asset(
+              'assets/${widget.item.bg}',
+              width: size.width * 0.15,
+              height: size.width * 0.15,
+              fit: BoxFit.cover,
+            ),
           ),
-          IconButton(
-            icon: Icon(Icons.playlist_play_outlined),
-            onPressed: () {
-              setState(() {
-                isExpanded = true;
-                _currentHeight = (size.height * 0.6);
-                _controller.forward(from: 0.0);
-              });
-            },
-          ),
-          CircleAvatar(
-            backgroundImage: AssetImage('assets/avatar.jpg'),
-          )
-        ],
-      ),
+        ),
+        CircleAvatar(backgroundImage: AssetImage('assets/avatar.jpg'))
+      ],
     );
   }
 
@@ -196,9 +216,8 @@ class __BuildBottomNavState extends State<_BuildBottomNav> with SingleTickerProv
 }
 
 class _BuildList extends StatelessWidget {
-  const _BuildList({
-    Key key,
-  }) : super(key: key);
+  const _BuildList({Key key, @required this.onTap}) : super(key: key);
+  final ValueChanged<Item> onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +227,11 @@ class _BuildList extends StatelessWidget {
         final item = items[index];
         return Padding(
           padding: EdgeInsets.only(bottom: index == items.length - 1 ? 50.0 : 0.0),
-          child: _BuildListItem(item: item),
+          child: InkWell(
+              onTap: () {
+                onTap(item);
+              },
+              child: _BuildListItem(item: item)),
         );
       },
     );
