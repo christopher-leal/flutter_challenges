@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenges/challenges/bancomer_redesign/bancomer_redesign_main.dart';
+import 'package:flutter_challenges/challenges/expandable_bottom_nav/expandable_bottom_nav_main.dart';
 import 'package:flutter_challenges/utils/utils.dart';
 
 void main() => runApp(MyApp());
@@ -29,14 +30,28 @@ class _BuildListMenu extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            MaterialButton(
-              color: Colors.deepPurple,
-              padding: const EdgeInsets.all(15.0),
-              child: Text('Bancomer Redesign'),
-              onPressed: () {
-                Utils.navigateTo(context, BancomerRedesignMain());
-              },
-            )
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: MaterialButton(
+                color: Colors.deepPurple,
+                padding: const EdgeInsets.all(15.0),
+                child: Text('Bancomer Redesign'),
+                onPressed: () {
+                  Utils.navigateTo(context, BancomerRedesignMain());
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: MaterialButton(
+                color: Colors.deepPurple,
+                padding: const EdgeInsets.all(15.0),
+                child: Text('Expandable Bottom Nav'),
+                onPressed: () {
+                  Utils.navigateTo(context, ExpandableBottomNavMain());
+                },
+              ),
+            ),
           ],
         ),
       ),
