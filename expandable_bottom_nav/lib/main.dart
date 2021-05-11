@@ -1,4 +1,4 @@
-import 'package:expandable_bottom_nav/pages/home.dart';
+import 'package:expandable_bottom_nav/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
