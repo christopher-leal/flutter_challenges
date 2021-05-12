@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Item item;
+  Item item = items.first;
 
   @override
   Widget build(BuildContext context) {
@@ -229,10 +229,11 @@ class _BuildList extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(bottom: index == items.length - 1 ? 50.0 : 0.0),
           child: InkWell(
-              onTap: () {
-                onTap(item);
-              },
-              child: _BuildListItem(item: item)),
+            onTap: () {
+              onTap(item);
+            },
+            child: _BuildListItem(item: item),
+          ),
         );
       },
     );
