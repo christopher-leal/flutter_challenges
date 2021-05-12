@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_challenges/challenges/android_messages/android_messages_main.dart';
 import 'package:flutter_challenges/challenges/bancomer_redesign/bancomer_redesign_main.dart';
 import 'package:flutter_challenges/challenges/expandable_bottom_nav/expandable_bottom_nav_main.dart';
+import 'package:flutter_challenges/challenges/snake_button/snake_button_main.dart';
 import 'package:flutter_challenges/utils/utils.dart';
 
 void main() => runApp(MyApp());
@@ -24,7 +25,7 @@ class _BuildListMenu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Proyectos'),
+        title: Text('Challenges'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(15.0),
@@ -59,6 +60,17 @@ class _BuildListMenu extends StatelessWidget {
               child: Text('Android Messages App'),
               onPressed: () {
                 Utils.navigateTo(context, AndroidMessagesAppMain());
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: MaterialButton(
+              color: Colors.deepPurple,
+              padding: const EdgeInsets.all(15.0),
+              child: Text('Snake Button'),
+              onPressed: () {
+                Utils.navigateTo(context, SnakeButtonMain());
               },
             ),
           ),
