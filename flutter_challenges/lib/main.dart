@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenges/challenges/android_messages/android_messages_main.dart';
 import 'package:flutter_challenges/challenges/bancomer_redesign/bancomer_redesign_main.dart';
 import 'package:flutter_challenges/challenges/expandable_bottom_nav/expandable_bottom_nav_main.dart';
 import 'package:flutter_challenges/utils/utils.dart';
@@ -25,35 +26,43 @@ class _BuildListMenu extends StatelessWidget {
         centerTitle: true,
         title: Text('Proyectos'),
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: MaterialButton(
-                color: Colors.deepPurple,
-                padding: const EdgeInsets.all(15.0),
-                child: Text('Bancomer Redesign'),
-                onPressed: () {
-                  Utils.navigateTo(context, BancomerRedesignMain());
-                },
-              ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: MaterialButton(
+              color: Colors.deepPurple,
+              padding: const EdgeInsets.all(15.0),
+              child: Text('Bancomer Redesign'),
+              onPressed: () {
+                Utils.navigateTo(context, BancomerRedesignMain());
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: MaterialButton(
-                color: Colors.deepPurple,
-                padding: const EdgeInsets.all(15.0),
-                child: Text('Expandable Bottom Nav'),
-                onPressed: () {
-                  Utils.navigateTo(context, ExpandableBottomNavMain());
-                },
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: MaterialButton(
+              color: Colors.deepPurple,
+              padding: const EdgeInsets.all(15.0),
+              child: Text('Expandable Bottom Nav'),
+              onPressed: () {
+                Utils.navigateTo(context, ExpandableBottomNavMain());
+              },
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: MaterialButton(
+              color: Colors.deepPurple,
+              padding: const EdgeInsets.all(15.0),
+              child: Text('Android Messages App'),
+              onPressed: () {
+                Utils.navigateTo(context, AndroidMessagesAppMain());
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
