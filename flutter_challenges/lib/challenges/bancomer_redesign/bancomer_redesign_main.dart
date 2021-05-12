@@ -4,10 +4,9 @@ import 'package:flutter_challenges/challenges/bancomer_redesign/views/login_scre
 class BancomerRedesignMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'BBVA',
-      home: LoginScreen(),
+    return Theme(
+      data: ThemeData.light(),
+      child: LoginScreen(),
     );
   }
 }
